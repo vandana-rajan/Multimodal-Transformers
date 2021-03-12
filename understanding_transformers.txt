@@ -1,0 +1,22 @@
+Understanding Transformers
+
+Position wise feed forward network (FCFF):
+
+The position-wise feed-forward network accepts a 3-dim input with shape (batch size, sequence length, feature size). It consists of two dense layers that applies to the last dimension, which means the same dense layers are used for each position item in the sequence, so called position-wise. Similar to the muti-head attention, the position-wise feed-forward network will only change the last dimension size of the input. In addition, if two items in the input sequence are identical, the according outputs will be identical as well.
+
+The feed-forward layer is weights that is trained during training and the exact same matrix is applied to each respective token position. Since it is applied without any communcation with or inference by other token positions it is a highly parallelizable part of the model. The role and purpose is to process the output from one attention layer in a way to better fit the input for the next attention layer.
+
+Add and Norm:
+
+The input and the output of a multi-head attention layer or a position-wise feed-forward network are combined by a block that contains a residual structure and a layer normalization layer.Layer normalization is similar batch normalization, but the mean and variances are calculated along the last dimension, e.g X.mean(axis=-1) instead of the first batch dimension, e.g. X.mean(axis=0).
+The reason for layer normalisation is that with the residual addition, the energy of the resultant signal would be large and hence it has to be normalised. Layer normalization prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability.
+This allows gradients to flow more freely, benefiting the training process. Layer normalization stabilizes the training process further, yielding better results.
+Residual connections are very simple (add a block's input to its output), but at the same time are very useful: they ease the gradient flow through a network and allow stacking a lot of layers. 
+Positional Encoding:
+
+Unlike the recurrent layer, both the multi-head attention layer and the position-wise feed-forward network compute the output of each item in the sequence independently. This property allows us to parallel the computation but is inefficient to model the sequence information. The transformer model therefore adds positional information into the input sequence.
+
+
+References:
+
+1. https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html
