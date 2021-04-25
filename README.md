@@ -15,3 +15,4 @@ List of papers and resources for multimodal transformers
 
 7. Attending to Emotional Narratives, ACII 2019, https://github.com/frankaging/ACII2019-transformer
  
+8. VATT: Transformers for Multimodal Self-Supervised Learningfrom Raw Video, Audio and Text, https://arxiv.org/pdf/2104.11178.pdf
