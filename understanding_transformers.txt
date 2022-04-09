@@ -11,7 +11,7 @@ Add and Norm:
 The input and the output of a multi-head attention layer or a position-wise feed-forward network are combined by a block that contains a residual structure and a layer normalization layer.Layer normalization is similar batch normalization, but the mean and variances are calculated along the last dimension, e.g X.mean(axis=-1) instead of the first batch dimension, e.g. X.mean(axis=0).
 The reason for layer normalisation is that with the residual addition, the energy of the resultant signal would be large and hence it has to be normalised. Layer normalization prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability.
 This allows gradients to flow more freely, benefiting the training process. Layer normalization stabilizes the training process further, yielding better results.
-Residual connections are very simple (add a block's input to its output), but at the same time are very useful: they ease the gradient flow through a network and allow stacking a lot of layers. 
+Residual connections are very simple (add a block's input to its output), but at the same time are very useful: they ease the gradient flow through a network and allow stacking a lot of layers. In case the MHA or FF layers did not learn anything useful, these skip connections will just forward the signal to the next stage. 
 Positional Encoding:
 
 Unlike the recurrent layer, both the multi-head attention layer and the position-wise feed-forward network compute the output of each item in the sequence independently. This property allows us to parallel the computation but is inefficient to model the sequence information. The transformer model therefore adds positional information into the input sequence.
